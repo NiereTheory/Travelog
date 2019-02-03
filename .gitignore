@@ -1,5 +1,8 @@
 .vscode/
-Notes.txt#
+Notes.txt
+
+launchSettings.json
+appsettings.*
 
 # compiled output
 /dist
