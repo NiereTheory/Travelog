@@ -9,7 +9,8 @@ namespace API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<UserInRegisterDto, User>();
-            CreateMap<User, UserOutDetailDto>();
+            CreateMap<User, UserOutLoginDto>();
+            CreateMap<TravelogInCreateDto, Travel>();
         }
     }
 }

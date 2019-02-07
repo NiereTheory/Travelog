@@ -39,7 +39,7 @@ namespace API.Controllers
 
             var createdUser = await _authRepository.Register(userToCreate, userInRegisterDto.Password);
 
-            var userToReturn = _mapper.Map<UserOutDetailDto>(createdUser);
+            var userToReturn = _mapper.Map<UserOutLoginDto>(createdUser);
 
             return CreatedAtRoute("GetUser", new { controller = "Travelers", id = createdUser.Id }, userToReturn);
         }
@@ -72,7 +72,7 @@ namespace API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var user = _mapper.Map<UserOutDetailDto>(userFromRepo);
+            var user = _mapper.Map<User>(userFromRepo);
 
             return Ok(new
             {

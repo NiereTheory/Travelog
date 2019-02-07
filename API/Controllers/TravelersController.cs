@@ -23,8 +23,22 @@ namespace API.Controllers
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await travelersRepository.GetUser(id);
-            var userToReturn = _mapper.Map<UserOutDetailDto>(user);
-            return Ok(userToReturn);
+            return Ok(user);
+        }
+
+        // [HttpGet("{id}/travelog")]
+        // public async Task<IActionResult> GetUserTravelog(int id)
+        // {
+        //     var user = await travelersRepository.GetUser(id);
+        //     var userTravelogToReturn = _mapper.Map<UserOutTravelogDto>(user);
+        //     return Ok(userTravelogToReturn);
+        // }
+
+        [HttpGet("countries")]
+        public async Task<IActionResult> GetAllCountries()
+        {
+            var countries = await travelersRepository.GetAllCountries();
+            return Ok(countries);
         }
     }
 }
