@@ -1,15 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-    <a class="navbar-brand" href="#">TRAVELOG / USER</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Travelog</a>
-            <a class="nav-item nav-link" href="#">Search</a>
-            <a class="nav-item nav-link" [routerLink]="['/auth/login']">Login</a>
-            <a class="nav-item nav-link" [routerLink]="['/auth/register']">Register</a>
-        </div>
+    <div *ngIf="loggedIn()" class="navbar-nav">
+        <a class="nav-item nav-link" [routerLink]="['/travelog']">Travelog</a>
+        <a class="nav-item nav-link" [routerLink]="['/search']">Search</a>
+        <a class="nav-item nav-link" [routerLink]="" (click)="logout()">Logout</a>
+    </div>
+    <div *ngIf="!loggedIn()" class="navbar-nav">
+        <a class="nav-item nav-link" [routerLink]="['/auth/login']">Login</a>
+        <a class="nav-item nav-link" [routerLink]="['/auth/register']">Register</a>
     </div>
 </nav>

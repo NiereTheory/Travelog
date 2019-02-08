@@ -20,7 +20,7 @@ export class AuthService {
         return this.http.post(`${this.baseUrl}register`, user);
     }
 
-    login(user: any) {
+    login(user: any, enteredUsername: string) {
         return this.http.post(`${this.baseUrl}login`, user)
             .pipe(
                 map((response: any) => {
@@ -28,6 +28,7 @@ export class AuthService {
                     if (res) {
                         localStorage.setItem('token', res.token);
                         localStorage.setItem('user', JSON.stringify(res.user));
+                        localStorage.setItem('name', enteredUsername);
                         this.decodedToken = this.jwtHelper.decodeToken(res.token);
                     }
                 })
@@ -38,4 +39,5 @@ export class AuthService {
         const token = localStorage.getItem('token');
         return !this.jwtHelper.isTokenExpired(token);
     }
+
 }

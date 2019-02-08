@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 
 @Component({
     selector: 'app-login',
@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.user = Object.assign({}, this.loginForm.value);
-        this.authService.login(this.user).subscribe(() => {
-            this.router.navigate(['/home']);
+        this.authService.login(this.user, this.loginForm.value.username).subscribe(() => {
+            this.router.navigate(['/travelog']);
         }, error => {
             this.alertify.error(error);
         });

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
 
 @Component({
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
         }, error => {
             this.alertify.error(error);
         }, () => {
-            this.authService.login(this.user).subscribe(() => {
+            this.authService.login(this.user, this.registerForm.value.username).subscribe(() => {
                 this.router.navigate(['/home']);
             });
         });

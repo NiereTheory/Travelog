@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace API.Models
 {
@@ -14,6 +15,7 @@ namespace API.Models
         [Required]
         [StringLength(500)]
         public string Comments { get; set; }
+        [JsonIgnore]
         public DateTime Created { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }

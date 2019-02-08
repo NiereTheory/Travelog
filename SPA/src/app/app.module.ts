@@ -15,6 +15,10 @@ import { AuthComponent } from './components/auth/auth/auth.component';
 import { AlertifyService } from './services/alertify.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './components/search/search/search.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { TravelService } from './services/travel.service';
 
 @NgModule({
     declarations: [
@@ -24,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
         RegisterComponent,
         LoginComponent,
         HomeComponent,
-        AuthComponent
+        AuthComponent,
+        SearchComponent
     ],
     imports: [
         BrowserModule,
@@ -42,7 +47,10 @@ import { HttpClientModule } from '@angular/common/http';
         })
     ],
     providers: [
-        AlertifyService
+        AlertifyService,
+        AuthService,
+        TravelService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })
