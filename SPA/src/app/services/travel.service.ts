@@ -15,4 +15,8 @@ export class TravelService {
     getMyTravels(id: number) {
         return this.http.get(`${this.baseUrl}travelers/${id}`);
     }
+
+    addNewTravel(id: number, travel: any) {
+        return this.http.post(`${this.baseUrl}travelers/${id}/travelog`, travel);
+    }
 }

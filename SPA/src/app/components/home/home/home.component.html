@@ -1,13 +1,49 @@
-<div class="container">
-    <div class="row card-group">
-        <div class="col-md-4 card shadow-sm" *ngFor="let t of user.travels">
-            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-            <div class="">
-                <h5 class="bg-primary card-header text-white">{{ t.travelCity }}, {{
-                    t.country.shortName }}</h5>
-                <p class="card-text text-success text-center card--rating"><strong>{{ t.rating }} / 10</strong></p>
-                <p class="card-text text-muted card--comments">{{ t.comments }}</p>
-                <p class="card-footer text-center"><small class="text-muted">{{ t.travelDate | date }}</small></p>
+<div class="container" *ngIf="travelForm">
+    <div class="row">
+        <div class="col-md-4">
+            <form class="form" [formGroup]="travelForm" (ngSubmit)="addTravelEntry()">
+                <div class="form-group">
+                    <label for="" class="form--label text-primary">Travel Date</label>
+                    <input type="date" class="form-control" formControlName="travelDate">
+                </div>
+                <div class="form-group">
+                    <label for="" class="form--label text-primary">City</label>
+                    <input type="text" class="form-control" formControlName="travelCity">
+                </div>
+                <div class="form-group">
+                    <label for="" class="form--label text-primary">Rating</label>
+                    <select class="form-control" formControlName="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form--label text-primary">Comments</label>
+                    <input type="text" class="form-control" formControlName="comments">
+                </div>
+                <div class="form-group">
+                    <label for="" class="form--label text-primary">Country</label>
+                    <select class="form-control" formControlName="countryId">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <button class="form--submit btn btn-success btn-block shadow-sm" [disabled]="!travelForm.valid">LET'S
+                    GO</button>
+            </form>
+        </div>
+
+        <div class="row card-group col-md-8" *ngIf="user">
+            <div class="col-md-8 card shadow-sm" *ngFor="let t of user.travels">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="">
+                    <h5 class="bg-primary card-header text-white">{{ t.travelCity }}, {{
+                        t.country.shortName }}</h5>
+                    <p class="card-text text-success text-center card--rating"><strong>{{ t.rating }} / 10</strong></p>
+                    <p class="card-text text-muted card--comments">{{ t.comments }}</p>
+                    <p class="card-footer text-center"><small class="text-muted">{{ t.travelDate | date }}</small></p>
+                </div>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/user/{userId}/travelog")]
+    [Route("api/travelers/{userId}/travelog")]
     [ApiController]
     public class TravelogController : ControllerBase
     {
