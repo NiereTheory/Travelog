@@ -9,6 +9,7 @@ namespace API.Dtos
         public byte Rating { get; set; }
         public string Comments { get; set; }
         public int CountryId { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
+        public int UserId { get; set; }
+        public DateTime? Created { get; set; } = DateTime.Now;
     }
 }

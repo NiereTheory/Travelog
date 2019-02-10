@@ -13,9 +13,9 @@ namespace API.Data
         {
             this._context = context;
         }
-        public async Task<User> Login(string username, string password)
+        public async Task<User> Login(string email, string password) // email coming in as lower case
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email);
 
             if (user == null)
                 return null;
@@ -54,9 +54,9 @@ namespace API.Data
             return user;
         }
 
-        public async Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string username, string email) // coming in as lower case
         {
-            if (await _context.Users.AnyAsync(u => u.Username == username))
+            if (await _context.Users.AnyAsync(u => u.Username.ToLower() == username || u.Email.ToLower() == email))
                 return true;
 
             return false;

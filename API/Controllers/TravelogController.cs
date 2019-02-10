@@ -2,22 +2,27 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Data;
 using API.Dtos;
+using API.Helpers;
 using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/travelers/{userId}/travelog")]
+    [Route("api/travelogs")]
     [ApiController]
     public class TravelogController : ControllerBase
     {
-        private readonly ITravelersRepository travelersRepository;
+        private readonly ITravelogRepository _travelogRepository;
+        private readonly ICountryRepository _countryRepository;
+        private readonly ITravelersRepository _travelersRepository;
         private readonly IMapper _mapper;
 
-        public TravelogController(ITravelersRepository repo, IMapper mapper)
+        public TravelogController(ITravelogRepository trepo, ICountryRepository crepo, ITravelersRepository urepo, IMapper mapper)
         {
-            this.travelersRepository = repo;
+            this._travelogRepository = trepo;
+            this._countryRepository = crepo;
+            this._travelersRepository = urepo;
             this._mapper = mapper;
         }
 
@@ -27,20 +32,61 @@ namespace API.Controllers
             // if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //     return Unauthorized();
 
-            var user = await travelersRepository.GetUser(userId);
+            var user = await _travelersRepository.GetUser(travelogInCreateDto.UserId);
 
-            var country = await travelersRepository.GetCountry(travelogInCreateDto.CountryId);
+            var country = await _countryRepository.GetCountry(travelogInCreateDto.CountryId);
 
             var travelogEntry = _mapper.Map<Travel>(travelogInCreateDto);
-            travelogEntry.Country = country;
 
+            travelogEntry.Country = country;
             user.Travels.Add(travelogEntry);
-            if (await travelersRepository.SaveAll())
-                return Ok();
+
+            // _travelogRepository.AddOneTravelog(travelogEntry);
+
+            if (await _travelogRepository.SaveAll())
+                return StatusCode(201);
+            // return CreatedAtRoute()
 
             return BadRequest("Failed to add new travelog entry");
         }
 
+        [HttpDelete("{travelId}")]
+        public async Task<IActionResult> DeleteTravelogEntry(int travelId)
+        {
+            var travelogEntryToDelete = await _travelogRepository.GetOneTravelog(travelId);
 
+            _travelogRepository.DeleteOneTravelog(travelogEntryToDelete);
+
+            if (await _travelogRepository.SaveAll())
+                return NoContent();
+
+            return BadRequest("Failed to add new travelog entry");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReturnAllTravelogs([FromQuery] SearchParams searchParams)
+        {
+            var travelogs = await _travelogRepository.GetAllTravelog(searchParams);
+            var totalItems = travelogs.Count;
+            return Ok(new
+            {
+                travelogs,
+                totalItems
+            });
+        }
+
+        // [HttpGet("countries")]
+        // public async Task<IActionResult> GetAllCountries()
+        // {
+        //     var countries = await _travelogRepository.GetAllCountries();
+        //     return Ok(countries);
+        // }
+
+        // [HttpGet("country/{id}")]
+        // public async Task<IActionResult> GetCountry(int countryId)
+        // {
+        //     var country = await _travelogRepository.GetCountry(countryId);
+        //     return Ok(country);
+        // }
     }
 }

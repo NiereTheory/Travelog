@@ -8,18 +8,16 @@ namespace API.Models
     public class User
     {
         public int Id { get; set; }
-        [Required]
         public string Username { get; set; }
-        [Required]
+        [EmailAddress]
+        [JsonIgnore]
+        public string Email { get; set; }
         [JsonIgnore]
         public byte[] PasswordHash { get; set; }
-        [Required]
         [JsonIgnore]
         public byte[] PasswordSalt { get; set; }
         public DateTime LastLogin { get; set; }
         public DateTime Created { get; set; }
-        [JsonIgnore]
-        public DateTime LastMapCreation { get; set; }
         public ICollection<Travel> Travels { get; set; }
     }
 }

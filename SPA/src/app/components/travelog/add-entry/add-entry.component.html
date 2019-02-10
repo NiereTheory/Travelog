@@ -1,0 +1,30 @@
+<form class="form" [formGroup]="travelForm" (ngSubmit)="addTravelEntry()">
+    <div class="form-group">
+        <label for="" class="form--label text-primary">Travel Date</label>
+        <input type="date" class="form-control" formControlName="travelDate">
+    </div>
+    <div class="form-group">
+        <label for="" class="form--label text-primary">City</label>
+        <input type="text" class="form-control" formControlName="travelCity">
+    </div>
+    <div class="form-group">
+        <label for="" class="form--label text-primary">Rating</label>
+        <select class="form-control" formControlName="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="" class="form--label text-primary">Comments</label>
+        <input type="text" class="form-control" formControlName="comments">
+    </div>
+    <div class="form-group">
+        <label for="" class="form--label text-primary">Country</label>
+        <select class="form-control" formControlName="countryId">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+    </div>
+    <button class="form--submit btn btn-success btn-block shadow-sm" [disabled]="!travelForm.valid">ADD IT</button>
+</form>

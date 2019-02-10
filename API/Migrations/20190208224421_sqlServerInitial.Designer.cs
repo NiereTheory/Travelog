@@ -3,25 +3,29 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190202194738_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190208224421_sqlServerInitial")]
+    partial class sqlServerInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("API.Models.Country", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Continent")
                         .IsRequired();
@@ -45,7 +49,8 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Travel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comments")
                         .IsRequired()
@@ -75,22 +80,20 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Created");
 
+                    b.Property<string>("Email");
+
                     b.Property<DateTime>("LastLogin");
 
-                    b.Property<DateTime>("LastMapCreation");
+                    b.Property<byte[]>("PasswordHash");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired();
+                    b.Property<byte[]>("PasswordSalt");
 
-                    b.Property<string>("PasswordSalt")
-                        .IsRequired();
-
-                    b.Property<string>("Username")
-                        .IsRequired();
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/User';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class TravelService {
     ) { }
 
     getMyTravels(id: number) {
-        return this.http.get(`${this.baseUrl}travelers/${id}`);
+        return this.http.get<User>(`${this.baseUrl}travelers/${id}/travelog`);
     }
 
     addNewTravel(id: number, travel: any) {

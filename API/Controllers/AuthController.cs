@@ -30,24 +30,25 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserInRegisterDto userInRegisterDto)
         {
-            userInRegisterDto.Username = userInRegisterDto.Username.ToLower();
-
-            if (await _authRepository.UserExists(userInRegisterDto.Username))
-                return BadRequest("Username already exists");
+            if (await _authRepository.UserExists(userInRegisterDto.Username.ToLower(), userInRegisterDto.Email.ToLower()))
+                return BadRequest("User credentials already exists");
 
             var userToCreate = _mapper.Map<User>(userInRegisterDto);
+            userToCreate.Created = DateTime.Now;
 
             var createdUser = await _authRepository.Register(userToCreate, userInRegisterDto.Password);
 
-            var userToReturn = _mapper.Map<UserOutLoginDto>(createdUser);
+            // var userToReturn = _mapper.Map<UserOutLoginDto>(createdUser);
 
-            return CreatedAtRoute("GetUser", new { controller = "Travelers", id = createdUser.Id }, userToReturn);
+            return StatusCode(201);
+
+            // return CreatedAtRoute("GetUser", new { controller = "Travelers", id = createdUser.Id }, userToReturn);
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserInRegisterDto userInRegisterDto)
+        public async Task<IActionResult> Login(UserInLoginDto userInLoginDto)
         {
-            var userFromRepo = await _authRepository.Login(userInRegisterDto.Username.ToLower(), userInRegisterDto.Password);
+            var userFromRepo = await _authRepository.Login(userInLoginDto.Email.ToLower(), userInLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();
@@ -72,7 +73,7 @@ namespace API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var user = _mapper.Map<User>(userFromRepo);
+            var user = _mapper.Map<UserOutLoginDto>(userFromRepo);
 
             return Ok(new
             {

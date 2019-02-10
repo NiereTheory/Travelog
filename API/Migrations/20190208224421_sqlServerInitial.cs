@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class sqlServerInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +13,7 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ShortName = table.Column<string>(nullable: false),
                     LongName = table.Column<string>(nullable: false),
                     FlagUrl = table.Column<string>(nullable: true),
@@ -29,13 +30,13 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Username = table.Column<string>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: false),
-                    PasswordSalt = table.Column<string>(nullable: false),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Username = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
                     LastLogin = table.Column<DateTime>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastMapCreation = table.Column<DateTime>(nullable: false)
+                    Created = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,7 +48,7 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TravelDate = table.Column<DateTime>(nullable: false),
                     TravelCity = table.Column<string>(nullable: true),
                     Rating = table.Column<byte>(nullable: false),

@@ -8,9 +8,8 @@ import { NavComponent } from './components/shared/nav/nav.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { HomeComponent } from './components/home/home/home.component';
 import { RouterModule } from '@angular/router';
-import { appRoutes } from './routes';
+import { appRoutes, routingComponents } from './routes';
 import { AuthComponent } from './components/auth/auth/auth.component';
 import { AlertifyService } from './services/alertify.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -19,17 +18,17 @@ import { SearchComponent } from './components/search/search/search.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TravelService } from './services/travel.service';
+import { TravelogEntryComponent } from './components/shared/travelog-entry/travelog-entry.component';
+import { MyTravelogComponent } from './components/travelog/my-travelog/my-travelog.component';
+import { AddEntryComponent } from './components/travelog/add-entry/add-entry.component';
+import { TravelogComponent } from './components/travelog/travelog/travelog.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavComponent,
         FooterComponent,
-        RegisterComponent,
-        LoginComponent,
-        HomeComponent,
-        AuthComponent,
-        SearchComponent
+        routingComponents
     ],
     imports: [
         BrowserModule,

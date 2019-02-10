@@ -11,6 +11,7 @@ namespace API.Helpers
             CreateMap<UserInRegisterDto, User>();
             CreateMap<User, UserOutLoginDto>();
             CreateMap<TravelogInCreateDto, Travel>();
+            CreateMap<User, TravelogOutDto>();
         }
     }
 }

@@ -1,0 +1,10 @@
+Local: 
+docker pull microsoft/mssql-server-linux:latest
+
+docker run -d --name sql_server_travelog -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=MyFancyPassword!' -p 1433:1433 microsoft/mssql-server-linux
+
+docker container start/stop b3b
+
+npm install -g sql-cli
+mssql -u sa -p MyFancyPassword!
+-- query as normal
