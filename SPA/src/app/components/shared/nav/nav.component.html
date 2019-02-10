@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div *ngIf="loggedIn()" class="navbar-nav">
-        <a class="nav-item nav-link" [routerLink]="['/travelog']">Travelog</a>
-        <a class="nav-item nav-link" [routerLink]="['/search']">Search</a>
+        <a class="nav-item nav-link" [routerLink]="['travelog/list']">Travelog</a>
+        <a class="nav-item nav-link" [routerLink]="['search']">Search</a>
         <a class="nav-item nav-link" [routerLink]="" (click)="logout()">Logout</a>
     </div>
     <div *ngIf="!loggedIn()" class="navbar-nav">
-        <a class="nav-item nav-link" [routerLink]="['/auth/login']">Login</a>
-        <a class="nav-item nav-link" [routerLink]="['/auth/register']">Register</a>
+        <a class="nav-item nav-link" [routerLink]="['login']">Login</a>
+        <a class="nav-item nav-link" [routerLink]="['register']">Register</a>
     </div>
 </nav>

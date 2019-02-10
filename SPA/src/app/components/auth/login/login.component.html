@@ -3,8 +3,8 @@
         <h2 class="form--header text-secondary">WELCOME BACK</h2>
         <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="form-group">
-                <label for="" class="form--label text-primary">Username</label>
-                <input type="text" class="form-control" formControlName="username">
+                <label for="" class="form--label text-primary">Email</label>
+                <input type="email" class="form-control" formControlName="email">
             </div>
             <div class="form-group">
                 <label for="" class="form--label text-primary">Password</label>
@@ -14,3 +14,4 @@
         </form>
     </div>
 </div>
+<app-footer></app-footer>

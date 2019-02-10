@@ -27,15 +27,16 @@ export class LoginComponent implements OnInit {
 
     createLoginForm() {
         this.loginForm = this.fb.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
+            email: ['', Validators.compose([Validators.required, Validators.email])],
+            password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
         });
     }
 
     login() {
         this.user = Object.assign({}, this.loginForm.value);
-        this.authService.login(this.user, this.loginForm.value.username).subscribe(() => {
-            this.router.navigate(['/travelog']);
+        console.log(this.user);
+        this.authService.login(this.user).subscribe(() => {
+            this.router.navigate(['/travelog/list']);
         }, error => {
             this.alertify.error(error);
         });

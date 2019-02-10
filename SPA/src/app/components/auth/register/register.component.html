@@ -3,6 +3,10 @@
         <h2 class="form--header text-secondary">NEW TRAVELER</h2>
         <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
             <div class="form-group">
+                <label for="" class="form--label text-primary">Email Address</label>
+                <input type="email" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
                 <label for="" class="form--label text-primary">New Username</label>
                 <input type="text" class="form-control" formControlName="username">
             </div>
@@ -15,3 +19,5 @@
         </form>
     </div>
 </div>
+
+<app-footer></app-footer>

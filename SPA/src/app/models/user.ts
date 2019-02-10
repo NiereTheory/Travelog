@@ -1,4 +1,12 @@
+import { Travel } from './Travel';
+
 export interface User {
     id: number;
-    password: string;
+    username: string;
+    lastLogin: Date;
+    created: Date;
+    travels: Travel[];
+    email?: string;
+    password?: string;
+
 }

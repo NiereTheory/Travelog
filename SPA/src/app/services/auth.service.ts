@@ -20,7 +20,8 @@ export class AuthService {
         return this.http.post(`${this.baseUrl}register`, user);
     }
 
-    login(user: any, enteredUsername: string) {
+    login(user: any) {
+
         return this.http.post(`${this.baseUrl}login`, user)
             .pipe(
                 map((response: any) => {
@@ -28,7 +29,7 @@ export class AuthService {
                     if (res) {
                         localStorage.setItem('token', res.token);
                         localStorage.setItem('user', JSON.stringify(res.user));
-                        localStorage.setItem('name', enteredUsername);
+                        localStorage.setItem('name', user.username);
                         this.decodedToken = this.jwtHelper.decodeToken(res.token);
                     }
                 })

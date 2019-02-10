@@ -2,6 +2,9 @@
     color: white;
     padding: .5rem;
     letter-spacing: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer--header {

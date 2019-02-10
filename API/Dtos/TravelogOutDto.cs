@@ -3,7 +3,7 @@ using API.Models;
 
 namespace API.Dtos
 {
-    public class UserOutTravelogDto
+    public class TravelogOutDto
     {
 
         public int Id { get; set; }

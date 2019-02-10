@@ -27,19 +27,20 @@ export class RegisterComponent implements OnInit {
 
     createRegisterForm() {
         this.registerForm = this.fb.group({
+            email: ['', Validators.compose([Validators.required, Validators.email])],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
         });
     }
 
     register() {
         this.user = Object.assign({}, this.registerForm.value);
         this.authService.register(this.user).subscribe(() => {
-            this.alertify.success(`Welcome ${this.registerForm.value.username.toUpperCase()}`);
+            this.alertify.success(`Welcome ${this.user.username}`);
         }, error => {
             this.alertify.error(error);
         }, () => {
-            this.authService.login(this.user, this.registerForm.value.username).subscribe(() => {
+            this.authService.login(this.user).subscribe(() => {
                 this.router.navigate(['/home']);
             });
         });

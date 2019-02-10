@@ -39,9 +39,11 @@ namespace API
             services.AddCors();
             services.AddAutoMapper();
 
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<ITravelersRepository, TravelersRepository>();
+            services.AddScoped<ITravelogRepository, TravelogRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
