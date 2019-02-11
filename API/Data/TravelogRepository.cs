@@ -33,20 +33,17 @@ namespace API.Data
                 .Where(c => c.Country.Id == searchParams.CountryId)
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(searchParams.OrderDescBy))
-                switch (searchParams.OrderDescBy)
-                {
-                    case "rating":
-                        travels = travels.OrderByDescending(t => t.Rating);
-                        break;
-                    default:
-                        travels = travels.OrderByDescending(t => t.TravelDate);
-                        break;
-                }
+            switch (searchParams.OrderBy.ToLower())
+            {
+                case "rating":
+                    travels = travels.OrderByDescending(t => t.Rating);
+                    break;
+                default:
+                    travels = travels.OrderByDescending(t => t.TravelDate);
+                    break;
+            }
 
-            return await travels
-                .OrderByDescending(r => r.Rating)
-                .ToListAsync();
+            return await travels.ToListAsync();
         }
 
         public async Task<Travel> GetOneTravelog(int id)

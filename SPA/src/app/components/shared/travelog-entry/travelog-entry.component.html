@@ -1,6 +1,7 @@
 <div class="card border-light shadow-sm">
     <div class="card-header bg-info text-white">
-        <span class="travelLocation card-title">{{ travel.travelCity | uppercase }}, {{ travel.country.shortName }}</span>
+        <span class="travelLocation card-title">{{ travel.travelCity | uppercase }}<br>{{ travel.country.longName |
+            uppercase }}</span>
         <span class="travelFlag pull-right">{{ travel.country.flagUrl }}</span>
     </div>
     <div class="card-body">
@@ -9,6 +10,6 @@
     </div>
     <div class="card-footer">
         <span class="travelDate text-muted">{{ travel.travelDate | date }}</span>
-        <!-- Potentially add photo listing here -->
+        <a class="pull-right text-danger" *ngIf="user.id == travel.userId" href="">Delete</a>
     </div>
 </div>

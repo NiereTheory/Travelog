@@ -1,3 +1,15 @@
-<p>
-  search works!
-</p>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" (click)="showMyTravelog()">My Travelog</button>
+    <button type="button" class="btn btn-secondary" (click)="showSearchSection()">Search</button>
+</div>
+
+<app-filter-search *ngIf="showSearch" [countries]="countries" (travelsFromSearch)="getChildSearchResults($event)"></app-filter-search>
+
+<div class="header text-center">
+    <h2>My Travelog</h2>
+    <!-- <h5 class="text-muted">{{ travels.length }} Entries</h5> -->
+</div>
+
+<div class="wrapper bg-light">
+    <app-travelog-entry [travel]="travel" *ngFor="let travel of travels"></app-travelog-entry>
+</div>

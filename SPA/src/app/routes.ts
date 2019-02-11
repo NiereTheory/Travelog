@@ -12,12 +12,7 @@ export const appRoutes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    {
-        path: 'travelog', component: TravelogComponent, children: [
-            { path: 'add', component: AddEntryComponent },
-            { path: 'list', component: MyTravelogComponent }
-        ]
-    },
+    { path: 'add', component: AddEntryComponent },
     { path: 'search', component: SearchComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
