@@ -22,13 +22,15 @@ import { TravelogEntryComponent } from './components/shared/travelog-entry/trave
 import { MyTravelogComponent } from './components/travelog/my-travelog/my-travelog.component';
 import { AddEntryComponent } from './components/travelog/add-entry/add-entry.component';
 import { TravelogComponent } from './components/travelog/travelog/travelog.component';
+import { FilterSearchComponent } from './components/search/filter-search/filter-search.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavComponent,
         FooterComponent,
-        routingComponents
+        routingComponents,
+        FilterSearchComponent
     ],
     imports: [
         BrowserModule,

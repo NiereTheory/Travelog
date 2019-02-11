@@ -3,6 +3,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { TravelService } from 'src/app/services/travel.service';
 import { User } from 'src/app/models/User';
+import { Country } from 'src/app/models/Country';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-add-entry',
@@ -13,18 +15,25 @@ export class AddEntryComponent implements OnInit {
 
     user: User;
     travelForm: FormGroup;
-    newTravel: {};
+    countries: Country[];
 
     constructor(
         private alertify: AlertifyService,
         private travelService: TravelService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ) { }
 
     ngOnInit() {
         this.createTravelForm();
+        this.getCountries();
         this.user = JSON.parse(localStorage.getItem('user'));
-        console.log('Add Entry Component');
+    }
+
+    getCountries() {
+        this.travelService.getCountries().subscribe((res) => {
+            this.countries = res;
+        });
     }
 
     createTravelForm() {
@@ -38,11 +47,11 @@ export class AddEntryComponent implements OnInit {
     }
 
     addTravelEntry() {
-        this.newTravel = Object.assign({}, this.travelForm.value);
-        this.travelService.addNewTravel(this.user.id, this.newTravel).subscribe(() => {
-            // this.router.navigate(['/travelog']);
-            // apped to array of travels
-            this.alertify.success('WORKED');
+        const newTravel = Object.assign({}, this.travelForm.value);
+        newTravel.userId = this.user.id;
+        this.travelService.addNewTravel(newTravel).subscribe(() => {
+            this.alertify.success('Travelog entry added');
+            this.router.navigate(['/search']);
         }, error => {
             this.alertify.error(error);
         });

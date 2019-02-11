@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
+import { Country } from '../models/Country';
+import { Travel } from '../models/Travel';
 
 @Injectable({
     providedIn: 'root'
@@ -14,10 +16,22 @@ export class TravelService {
     ) { }
 
     getMyTravels(id: number) {
-        return this.http.get<User>(`${this.baseUrl}travelers/${id}/travelog`);
+        return this.http.get<User>(`${this.baseUrl}travelers/${id}`);
     }
 
-    addNewTravel(id: number, travel: any) {
-        return this.http.post(`${this.baseUrl}travelers/${id}/travelog`, travel);
+    addNewTravel(travel: any) {
+        console.log(travel);
+        return this.http.post(`${this.baseUrl}travelogs`, travel);
+    }
+
+    getCountries() {
+        return this.http.get<Country[]>(`${this.baseUrl}countries`);
+    }
+
+    searchAllTravels(searchParams) {
+        let params = new HttpParams();
+        params = params.append('countryId', searchParams.countryId);
+        params = params.append('orderBy', searchParams.orderBy);
+        return this.http.get<Travel[]>(`${this.baseUrl}travelogs`, { params });
     }
 }

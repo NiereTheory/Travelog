@@ -7,5 +7,5 @@ export interface Travel {
     rating: number;
     comments: string;
     country: Country;
-
+    userId: number;
 }

@@ -34,9 +34,8 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.user = Object.assign({}, this.loginForm.value);
-        console.log(this.user);
         this.authService.login(this.user).subscribe(() => {
-            this.router.navigate(['/travelog/list']);
+            this.router.navigate(['/search']);
         }, error => {
             this.alertify.error(error);
         });

@@ -10,7 +10,6 @@ namespace API.Models
         [Required]
         public string ShortName { get; set; }
         [Required]
-        [JsonIgnore]
         public string LongName { get; set; }
         public string FlagUrl { get; set; }
         [Required]
