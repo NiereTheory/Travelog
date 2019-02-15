@@ -12,7 +12,8 @@ export class FilterSearchComponent implements OnInit {
 
     @Input() countries;
     searchForm: FormGroup;
-    // travelsFromSearch: Travel[];
+    orderByVal = 'rating';
+    travels: Travel[];
     @Output() travelsFromSearch = new EventEmitter<Travel[]>();
     constructor(
         private fb: FormBuilder,
@@ -21,6 +22,7 @@ export class FilterSearchComponent implements OnInit {
 
     ngOnInit() {
         this.createSearchForm();
+        this.travelService.travels.subscribe(t => this.travels = t);
     }
 
     createSearchForm() {

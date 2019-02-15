@@ -1,3 +1,4 @@
+<!-- HIDE FEATURE HERE -->
 <form class="form" [formGroup]="searchForm" (ngSubmit)="submitSearch()">
     <div class="form-group">
         <label for="" class="form--label text-primary">Country</label>
@@ -7,14 +8,15 @@
         </select>
     </div>
 
-    <label>
-        <input type="radio" value="rating" formControlName="orderBy" name="orderBy">
-        <span>Rating</span>
-    </label>
-    <label>
-        <input type="radio" value="recency" formControlName="orderBy" name="orderBy">
-        <span>Recency</span>
-    </label>
+    <label for="" class="form--label text-primary active">Ordering</label><br>
+    <div class="btn-group form-group">
+        <label class="btn btn-outline-info radio-btn" [(ngModel)]="orderByVal" btnRadio="rating" role="button"
+            formControlName="orderBy">Rating</label>
+        <label class="btn btn-outline-info radio-btn" [(ngModel)]="orderByVal" btnRadio="recency" role="button"
+            formControlName="orderBy">Recency</label>
+    </div>
 
-    <button class="btn btn-outline-success shadow">SEARCH IT</button>
+    <div class="form-group">
+        <button class="btn btn-success btn-block shadow">SEARCH IT</button>
+    </div>
 </form>

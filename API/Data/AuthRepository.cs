@@ -15,7 +15,7 @@ namespace API.Data
         }
         public async Task<User> Login(string email, string password) // email coming in as lower case
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
                 return null;
@@ -56,7 +56,7 @@ namespace API.Data
 
         public async Task<bool> UserExists(string username, string email) // coming in as lower case
         {
-            if (await _context.Users.AnyAsync(u => u.Username.ToLower() == username || u.Email.ToLower() == email))
+            if (await _context.Users.AnyAsync(u => string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase) || string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase)))
                 return true;
 
             return false;

@@ -28,7 +28,8 @@ export class SearchComponent implements OnInit {
     loadMyTravels(id: number) {
         this.travelService.getMyTravels(id).subscribe((res) => {
             this.user = res;
-            this.travels = this.user.travels;
+            // this.travels = this.user.travels;
+            this.travelService.setSharedTravelArray(this.travels);
         }, error => {
             this.alertify.error(error);
         });
