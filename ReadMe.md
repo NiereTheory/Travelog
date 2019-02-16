@@ -1,7 +1,8 @@
 <h2>Travelog</h2>
 
 <h4>Video Demo</h4>
-![Demo](https://github.com/NiereTheory/Travelog/blob/master/Demo.gif)
+<img src="./Demo.gif" alt="See local gif demo" height="500px">
+
 
 <p>The <b>purpose</b> of this project is to:</p>
 <ul>
@@ -12,7 +13,7 @@
     <li>Continue to work on my technical skills</li>
 </ul>
 
-<p>Technology components</p>
+<p>Technology components:</p>
 <ul>
     <li><b>Database</b>: SQL Server (Docker)</li>
     <li><b>API</b>: C#.NET Core, EF Core</li>
