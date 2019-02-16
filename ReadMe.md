@@ -1,7 +1,7 @@
-Demo<h2>Travelog</h2>
+<h2>Travelog</h2>
 
 <h4>Video Demo</h4>
-![](Demo.gif)
+![Demo](/Demo.gif)
 
 <p>The <b>purpose</b> of this project is to:</p>
 <ul>
