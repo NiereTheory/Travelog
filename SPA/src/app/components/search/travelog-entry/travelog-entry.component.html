@@ -1,0 +1,20 @@
+<div class="card-container" *ngIf="travels">
+    <div *ngFor="let travel of travels.travelog" class="card border-light shadow-sm">
+        <div class="card-header bg-info text-white">
+            <span class="travelLocation card-title">{{ travel.travelCity | uppercase }}<br>{{ travel.country.longName |
+                uppercase }}</span>
+            <span class="travelFlag pull-right">{{ travel.country.flagUrl }}</span>
+        </div>
+        <div class="card-body">
+            <p class="travelRating text-center" [ngClass]="travel.rating < 3 ? 'text-danger' : travel.rating > 8 ? 'text-success' : 'text-muted'"><b>{{
+                    travel.rating }} / 10</b></p>
+            <p class="travelComments card-text">{{ travel.comments }}</p>
+        </div>
+        <div class="card-footer">
+            <span class="travelDate text-muted">{{ travel.travelDate | date }}</span>
+            <a class="pull-right text-danger pointer" *ngIf="user.id == travel.user.id" (click)="deleteEntry(travel.id)">Delete</a>
+            <a class="pull-right text-info pointer" *ngIf="user.id != travel.user.id" (click)="seeUserProfile(travel.user.id)">Go
+                To {{ travel.user.username | uppercase }}'s Profile</a>
+        </div>
+    </div>
+</div>

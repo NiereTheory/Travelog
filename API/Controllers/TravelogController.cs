@@ -66,11 +66,11 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> ReturnAllTravelogs([FromQuery] SearchParams searchParams)
         {
-            var travelogs = await _travelogRepository.GetAllTravelog(searchParams);
-            var totalItems = travelogs.Count;
+            var travelog = await _travelogRepository.GetAllTravelog(searchParams);
+            var totalItems = travelog.Count;
             return Ok(new
             {
-                travelogs,
+                travelog,
                 totalItems
             });
         }

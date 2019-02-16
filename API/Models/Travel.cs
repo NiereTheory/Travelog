@@ -17,7 +17,6 @@ namespace API.Models
         public string Comments { get; set; }
         [JsonIgnore]
         public DateTime Created { get; set; }
-        [JsonIgnore]
         public User User { get; set; }
         public int UserId { get; set; }
         public Country Country { get; set; }
