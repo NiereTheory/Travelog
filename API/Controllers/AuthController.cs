@@ -30,7 +30,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserInRegisterDto userInRegisterDto)
         {
-            if (await _authRepository.UserExists(userInRegisterDto.Username.ToLower(), userInRegisterDto.Email.ToLower()))
+            if (await _authRepository.UserExists(userInRegisterDto.Username, userInRegisterDto.Email))
                 return BadRequest("User credentials already exists");
 
             var userToCreate = _mapper.Map<User>(userInRegisterDto);
@@ -48,7 +48,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserInLoginDto userInLoginDto)
         {
-            var userFromRepo = await _authRepository.Login(userInLoginDto.Email.ToLower(), userInLoginDto.Password);
+            var userFromRepo = await _authRepository.Login(userInLoginDto.Email, userInLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();

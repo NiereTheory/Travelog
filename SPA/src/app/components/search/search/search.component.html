@@ -1,15 +1,17 @@
-<div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-secondary" (click)="showMyTravelog()">My Travelog</button>
-    <button type="button" class="btn btn-secondary" (click)="showSearchSection()">Search</button>
+<div class="btn-group btn-block" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-outline-primary" (click)="showMyTravelog()" [disabled]="this.travels?.title.toLowerCase() == 'my travelog'">My
+        Travelog</button>
+    <button type="button" class="btn btn-outline-primary" (click)="toggleSearch()">
+        <span *ngIf="!showSearch"><i class="fa fa-search"></i></span>
+        <span *ngIf="showSearch">Hide Search</span>
+    </button>
 </div>
 
-<app-filter-search *ngIf="showSearch" [countries]="countries" (travelsFromSearch)="getChildSearchResults($event)"></app-filter-search>
+<app-filter-search *ngIf="showSearch" [countries]="countries" (searchSubmitted)="toggleSearch()"></app-filter-search>
 
 <div class="header text-center">
-    <h2>My Travelog</h2>
-    <!-- <h5 class="text-muted">{{ travels.length }} Entries</h5> -->
+    <h2 class="travelog-title">{{ travels?.title | uppercase }}</h2>
+    <h5 class="text-muted">{{ travels?.totalItems.toLocaleString('en') }} entries</h5>
 </div>
 
-<div class="wrapper bg-light">
-    <app-travelog-entry [travel]="travel" *ngFor="let travel of travels"></app-travelog-entry>
-</div>
+<app-travelog-entry></app-travelog-entry>

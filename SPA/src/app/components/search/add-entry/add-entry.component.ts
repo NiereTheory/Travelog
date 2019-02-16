@@ -41,7 +41,7 @@ export class AddEntryComponent implements OnInit {
             travelDate: ['', Validators.required],
             travelCity: ['', Validators.required],
             rating: ['', Validators.required],
-            comments: ['', Validators.required],
+            comments: ['', Validators.compose([Validators.required, Validators.maxLength(500)])],
             countryId: ['', Validators.required]
         });
     }
@@ -56,5 +56,4 @@ export class AddEntryComponent implements OnInit {
             this.alertify.error(error);
         });
     }
-
 }

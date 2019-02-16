@@ -1,20 +1,27 @@
-<form class="form" [formGroup]="searchForm" (ngSubmit)="submitSearch()">
-    <div class="form-group">
-        <label for="" class="form--label text-primary">Country</label>
-        <select class="form-control" formControlName="countryId">
-            <option selected="true" disabled="disablsed">Country Selection</option>
-            <option *ngFor="let country of countries" [value]="+country.id">{{ country.longName }}</option>
-        </select>
+<div class="form--skew bg-light shadow">
+    <div class="form--unskew">
+        <h2 class="form--header text-secondary">SEARCH TRAVELOGS</h2>
+        <form class="form" [formGroup]="searchForm" (ngSubmit)="submitSearch()">
+            <div class="form-group">
+                <label for="" class="form--label text-primary">Country</label>
+                <select class="form-control" formControlName="countryId">
+                    <option selected="true" disabled="disablsed">Country Selection</option>
+                    <option *ngFor="let country of countries" [value]="+country.id">{{ country.longName }}</option>
+                </select>
+            </div>
+
+            <label for="" class="form--label text-primary active">Ordering</label><br>
+            <div class="btn-group form-group">
+                <label class="btn btn-outline-info radio-btn" [(ngModel)]="orderByVal" btnRadio="rating" role="button"
+                    formControlName="orderBy">Rating</label>
+                <label class="btn btn-outline-info radio-btn" [(ngModel)]="orderByVal" btnRadio="recency" role="button"
+                    formControlName="orderBy">Recency</label>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success btn-block shadow" [disabled]="!searchForm.valid">SEARCH IT</button>
+            </div>
+        </form>
     </div>
-
-    <label>
-        <input type="radio" value="rating" formControlName="orderBy" name="orderBy">
-        <span>Rating</span>
-    </label>
-    <label>
-        <input type="radio" value="recency" formControlName="orderBy" name="orderBy">
-        <span>Recency</span>
-    </label>
-
-    <button class="btn btn-outline-success shadow">SEARCH IT</button>
-</form>
+</div>
+<hr>

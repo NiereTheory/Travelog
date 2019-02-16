@@ -3,10 +3,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { SearchComponent } from './components/search/search/search.component';
 import { AuthGuard } from './guards/auth.guard';
-import { TravelogComponent } from './components/travelog/travelog/travelog.component';
-import { MyTravelogComponent } from './components/travelog/my-travelog/my-travelog.component';
-import { AddEntryComponent } from './components/travelog/add-entry/add-entry.component';
-import { TravelogEntryComponent } from './components/shared/travelog-entry/travelog-entry.component';
+import { AddEntryComponent } from './components/search/add-entry/add-entry.component';
+import { TravelogEntryComponent } from './components/search/travelog-entry/travelog-entry.component';
 
 export const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -20,8 +18,6 @@ export const appRoutes: Routes = [
 export const routingComponents = [
     LoginComponent,
     RegisterComponent,
-    MyTravelogComponent,
-    TravelogComponent,
     AddEntryComponent,
     SearchComponent,
     TravelogEntryComponent

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TravelService } from 'src/app/services/travel.service';
 import { Travel } from 'src/app/models/Travel';
+import { TravelogEntity } from 'src/app/models/TravelogEntity';
 
 @Component({
     selector: 'app-filter-search',
@@ -12,8 +13,9 @@ export class FilterSearchComponent implements OnInit {
 
     @Input() countries;
     searchForm: FormGroup;
-    // travelsFromSearch: Travel[];
-    @Output() travelsFromSearch = new EventEmitter<Travel[]>();
+    orderByVal = 'rating';
+    travels: TravelogEntity;
+    @Output() searchSubmitted = new EventEmitter<boolean>();
     constructor(
         private fb: FormBuilder,
         private travelService: TravelService
@@ -21,6 +23,7 @@ export class FilterSearchComponent implements OnInit {
 
     ngOnInit() {
         this.createSearchForm();
+        this.travelService.travels.subscribe(t => this.travels = t);
     }
 
     createSearchForm() {
@@ -33,7 +36,8 @@ export class FilterSearchComponent implements OnInit {
     submitSearch() {
         const searchCriteria = Object.assign({}, this.searchForm.value);
         this.travelService.searchAllTravels(searchCriteria).subscribe((res) => {
-            this.travelsFromSearch.emit(res);
+            this.travelService.setSharedTravelArray(res, `${res.travelog[0].country.longName} Search results`);
+            this.searchSubmitted.emit(true);
         });
     }
 }

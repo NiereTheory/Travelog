@@ -1,4 +1,5 @@
 import { Country } from './Country';
+import { User } from './User';
 
 export interface Travel {
     id: number;
@@ -7,5 +8,5 @@ export interface Travel {
     rating: number;
     comments: string;
     country: Country;
-    userId: number;
+    user: User;
 }

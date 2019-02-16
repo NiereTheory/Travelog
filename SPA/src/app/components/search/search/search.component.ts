@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
-import { Travel } from 'src/app/models/Travel';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { TravelService } from 'src/app/services/travel.service';
 import { Country } from 'src/app/models/Country';
+import { TravelogEntity } from 'src/app/models/TravelogEntity';
 
 @Component({
     selector: 'app-search',
@@ -12,7 +12,7 @@ import { Country } from 'src/app/models/Country';
 })
 export class SearchComponent implements OnInit {
     user: User;
-    travels: Travel[];
+    travels: TravelogEntity;
     countries: Country[];
     showSearch = false;
     constructor(
@@ -24,13 +24,11 @@ export class SearchComponent implements OnInit {
         this.user = JSON.parse(localStorage.getItem('user'));
         this.loadMyTravels(this.user.id);
         this.getCountries();
+        this.travelService.travels.subscribe(t => this.travels = t);
     }
-    loadMyTravels(id: number) {
-        this.travelService.getMyTravels(id).subscribe((res) => {
-            this.user = res;
-            this.travels = this.user.travels;
-        }, error => {
-            this.alertify.error(error);
+    loadMyTravels(userId: number) {
+        this.travelService.searchAllTravels({ 'userId': userId, 'orderBy': 'recency' }).subscribe((res) => {
+            this.travelService.setSharedTravelArray(res, 'My Travelog');
         });
     }
 
@@ -41,17 +39,15 @@ export class SearchComponent implements OnInit {
     }
 
     showMyTravelog() {
+        this.loadMyTravels(this.user.id);
         this.showSearch = false;
-        this.travels = this.user.travels;
-    }
-
-    showSearchSection() {
-        this.showSearch = true;
-        this.travels = [];
     }
 
     getChildSearchResults(travels: any) {
-        console.log(travels);
         this.travels = travels.travelogs;
+    }
+
+    toggleSearch() {
+        this.showSearch = !this.showSearch;
     }
 }

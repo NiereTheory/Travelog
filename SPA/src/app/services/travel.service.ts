@@ -4,23 +4,28 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
 import { Country } from '../models/Country';
 import { Travel } from '../models/Travel';
+import { BehaviorSubject } from 'rxjs';
+import { TravelogEntity } from '../models/TravelogEntity';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TravelService {
     baseUrl = environment.apiUrl;
+    private travels$ = new BehaviorSubject<TravelogEntity>(null);
+    travels = this.travels$.asObservable();
 
     constructor(
         private http: HttpClient
     ) { }
 
-    getMyTravels(id: number) {
-        return this.http.get<User>(`${this.baseUrl}travelers/${id}`);
+    setSharedTravelArray(inTravels: TravelogEntity, title: string) {
+        inTravels.title = title;
+        inTravels.totalItems = inTravels.travelog.length;
+        this.travels$.next(inTravels);
     }
 
     addNewTravel(travel: any) {
-        console.log(travel);
         return this.http.post(`${this.baseUrl}travelogs`, travel);
     }
 
@@ -30,8 +35,19 @@ export class TravelService {
 
     searchAllTravels(searchParams) {
         let params = new HttpParams();
-        params = params.append('countryId', searchParams.countryId);
-        params = params.append('orderBy', searchParams.orderBy);
-        return this.http.get<Travel[]>(`${this.baseUrl}travelogs`, { params });
+        if (searchParams.countryId) {
+            params = params.append('countryId', searchParams.countryId);
+        }
+        if (searchParams.orderBy) {
+            params = params.append('orderBy', searchParams.orderBy);
+        }
+        if (searchParams.userId) {
+            params = params.append('userId', searchParams.userId);
+        }
+        return this.http.get<TravelogEntity>(`${this.baseUrl}travelogs`, { params });
+    }
+
+    deleteOneTravel(travelId: number) {
+        return this.http.delete(`${this.baseUrl}travelogs/${travelId}`);
     }
 }

@@ -16,8 +16,11 @@ namespace API.Models
         public byte[] PasswordHash { get; set; }
         [JsonIgnore]
         public byte[] PasswordSalt { get; set; }
+        [JsonIgnore]
         public DateTime LastLogin { get; set; }
+        [JsonIgnore]
         public DateTime Created { get; set; }
+        [JsonIgnore]
         public ICollection<Travel> Travels { get; set; }
     }
 }

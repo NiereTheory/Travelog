@@ -30,18 +30,24 @@ namespace API.Data
         {
             var travels = _context.Travels
                 .Include(c => c.Country)
-                .Where(c => c.Country.Id == searchParams.CountryId)
+                .Include(u => u.User)
                 .AsQueryable();
 
-            switch (searchParams.OrderBy.ToLower())
+            if (searchParams.CountryId != null)
             {
-                case "rating":
-                    travels = travels.OrderByDescending(t => t.Rating);
-                    break;
-                default:
-                    travels = travels.OrderByDescending(t => t.TravelDate);
-                    break;
+                travels = travels.Where(c => c.Country.Id == searchParams.CountryId);
             }
+
+            if (searchParams.UserId != null)
+            {
+                travels = travels.Where(u => u.UserId == searchParams.UserId);
+            }
+
+            if (searchParams.OrderBy == "rating")
+            {
+                travels = travels.OrderByDescending(t => t.Rating);
+            }
+            travels = travels.OrderByDescending(t => t.TravelDate);
 
             return await travels.ToListAsync();
         }
