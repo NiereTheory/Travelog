@@ -1,7 +1,7 @@
 <h2>Travelog</h2>
 
 <h4>Video Demo</h4>
-![Demo](/Demo.gif)
+![Demo](https://github.com/NiereTheory/Travelog/blob/master/Demo.gif)
 
 <p>The <b>purpose</b> of this project is to:</p>
 <ul>
