@@ -1,0 +1,15 @@
+TODO
+
+Cloud (S3?) hosted images
+
+Global error handlers (both)
+
+Testing
+
+Paging
+
+ETL folder for countries to start 
+    http://mohammopedia.wikia.com/wiki/List_of_Countries_in_New_World_Order scrape this? flags?
+    https://abbreviations.yourdictionary.com/articles/country-abbreviations.html
+
+Caching

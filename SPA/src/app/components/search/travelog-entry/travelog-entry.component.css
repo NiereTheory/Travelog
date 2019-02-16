@@ -16,3 +16,7 @@
 .card-header img {
     justify-self: end;
 }
+.card-body {
+    display: grid;
+    grid-auto-rows: min-content;
+}
