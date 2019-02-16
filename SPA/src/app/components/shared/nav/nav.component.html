@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-    <div *ngIf="loggedIn()" class="nav-container">
+    <div *ngIf="loggedIn()" class="nav-container-in">
         <a class="nav-item text-white text-center" [routerLink]="['search']">Search</a>
         <a class="nav-item text-white text-center" [routerLink]="['add']">Add</a>
         <a class="nav-item text-white text-center" [routerLink]="" (click)="logout()">Logout</a>
     </div>
-    <div *ngIf="!loggedIn()" class="nav-container">
+    <div *ngIf="!loggedIn()" class="nav-container-out">
         <a class="nav-item text-white text-center" [routerLink]="['login']">Login</a>
         <a class="nav-item text-white text-center" [routerLink]="['register']">Register</a>
     </div>

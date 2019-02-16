@@ -36,7 +36,7 @@ export class FilterSearchComponent implements OnInit {
     submitSearch() {
         const searchCriteria = Object.assign({}, this.searchForm.value);
         this.travelService.searchAllTravels(searchCriteria).subscribe((res) => {
-            this.travelService.setSharedTravelArray(res, `${res.travelog[0].country.shortName} Search results`);
+            this.travelService.setSharedTravelArray(res, `${res.travelog[0].country.longName} Search results`);
             this.searchSubmitted.emit(true);
         });
     }

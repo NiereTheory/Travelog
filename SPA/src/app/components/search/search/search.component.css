@@ -1,7 +1,9 @@
 .btn-group {
     padding: 1rem;
 }
-
+.btn-group button {
+    width: 50%;
+}
 .travelog-title {
     margin-bottom: 0;
 }
